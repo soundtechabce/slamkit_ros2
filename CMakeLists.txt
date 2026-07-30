@@ -32,6 +32,7 @@ file(GLOB SLAMKITSDK_SRC
 )
 
 find_package(ament_cmake REQUIRED)
+find_package(ament_cmake_target_dependencies REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(std_srvs REQUIRED)
@@ -50,19 +51,19 @@ include_directories(
 )
 
 add_executable(slamkitNode src/node.cpp ${SLAMKITSDK_SRC})
-ament_target_dependencies(slamkitNode
-  rclcpp
-  std_srvs
-  sensor_msgs
+#target_link_libraries(slamkitNode  ${LIBUSB_LIBRARIES})
+target_link_libraries(slamkitNode
+  ${rclcpp_TARGETS}
+  ${std_srvs_TARGETS}
+  ${sensor_msgs_TARGETS}
 )
-target_link_libraries(slamkitNode  ${LIBUSB_LIBRARIES})
 
 add_executable(slamkitNodeClient src/client.cpp)
-target_link_libraries(slamkitNodeClient ${LIBUSB_LIBRARIES})
-ament_target_dependencies(slamkitNodeClient
-  rclcpp
-  std_srvs
-  sensor_msgs
+#target_link_libraries(slamkitNodeClient ${LIBUSB_LIBRARIES})
+target_link_libraries(slamkitNodeClient
+  ${rclcpp_TARGETS}
+  ${std_srvs_TARGETS}
+  ${sensor_msgs_TARGETS}
 )
 
 install(DIRECTORY launch rviz
