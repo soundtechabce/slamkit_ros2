@@ -51,7 +51,7 @@ include_directories(
 )
 
 add_executable(slamkitNode src/node.cpp ${SLAMKITSDK_SRC})
-#target_link_libraries(slamkitNode  ${LIBUSB_LIBRARIES})
+target_link_libraries(slamkitNode  ${LIBUSB_LIBRARIES})
 target_link_libraries(slamkitNode
   ${rclcpp_TARGETS}
   ${std_srvs_TARGETS}
@@ -59,7 +59,7 @@ target_link_libraries(slamkitNode
 )
 
 add_executable(slamkitNodeClient src/client.cpp)
-#target_link_libraries(slamkitNodeClient ${LIBUSB_LIBRARIES})
+target_link_libraries(slamkitNodeClient ${LIBUSB_LIBRARIES})
 target_link_libraries(slamkitNodeClient
   ${rclcpp_TARGETS}
   ${std_srvs_TARGETS}
