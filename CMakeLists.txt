@@ -5,7 +5,7 @@ if(NOT CMAKE_CXX_STANDARD)
   set(CMAKE_CXX_STANDARD 17)
 endif()
 
-set(SLAMKITSDK_PATH "${CMAKE_CURRENT_SOURCE_DIR}/sdk/slamkit/")
+set(SLAMKITSDK_PATH "${CMAKE_CURRENT_SOURCE_DIR}/sdk/slamkit_sdk")
 set(SLAMKITSDK_ROS_PATH "./sdk")
 set(CMAKE_BUILD_TYPE "Release")
 set(CMAKE_CXX_FLAGS "-std=c++17 ${CMAKE_CXX_FLAGS}")
@@ -53,6 +53,7 @@ include_directories(
 add_executable(slamkitNode src/node.cpp ${SLAMKITSDK_SRC})
 target_link_libraries(slamkitNode  ${LIBUSB_LIBRARIES})
 target_link_libraries(slamkitNode
+  ${LIBUSB_LIBRARIES}
   ${rclcpp_TARGETS}
   ${std_srvs_TARGETS}
   ${sensor_msgs_TARGETS}
@@ -61,6 +62,7 @@ target_link_libraries(slamkitNode
 add_executable(slamkitNodeClient src/client.cpp)
 target_link_libraries(slamkitNodeClient ${LIBUSB_LIBRARIES})
 target_link_libraries(slamkitNodeClient
+  ${LIBUSB_LIBRARIES}
   ${rclcpp_TARGETS}
   ${std_srvs_TARGETS}
   ${sensor_msgs_TARGETS}
